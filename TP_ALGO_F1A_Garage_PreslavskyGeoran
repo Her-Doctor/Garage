@@ -1,0 +1,152 @@
+//ALGO Le garage automobile
+//BUT
+//ENTREE
+//SORTIE
+{
+	Cette version contient les enregistrements , la fonction de la cote argus et le début du programme principal.
+	Cette version ne contient pas la création des garages , des voitures , la génération de plaques , leur age , l'association des voitures aux garages et toutes les fonctionnalités attendues . 
+}
+{
+	
+	Type adresse =enregistrement
+		numero: ENTIER
+		Rue:chaine
+		Codepostal:ENTIER
+		ville:chaine
+		pays:chaine
+		numero_tel:ENTIER
+		email:chaine
+	FINenregistrement
+
+	Type Tabgarage= enregistrement
+		Tabadresse : tableau de adresse
+	FINenregistrement
+
+	Type garage = enregistrement
+		nom:chaine
+		Tabadresse:Tabgarage
+		nombre_voiture:ENTIER
+	FINenregistrement
+
+	Type marque= (Saab,Ford,Pontiac,Koenigsegg,Dodge)
+
+	Type energie= (Essence,Diesel,GPL,Electrique,Hybride)
+
+	Type voiture = Enregistrement
+		marque_voiture:marque
+		modele:chaine
+		consommable:energie
+		P_fiscale:ENTIER
+		P_Dyn:ENTIER
+		Couleur:chaine
+							options:
+		Millesime:ENTIER
+		V_a_neuf:ENTIER
+		Cote_d_argus:ENTIER
+		Date_de_mise_circul:ENTIER
+		Age:ENTIER
+		Plaque:ENTIER
+	FINenregistrement
+
+//Variables principales
+VAR
+	Annee ,cpt: ENTIER
+	Marque_V,Modele_V:chaine
+
+	fonction cote_argus(voiture.Millesime:ENTIER,voiture.age:ENTIER,Annee:ENTIER,V_a_neuf:ENTIER) : ENTIER
+		DEBUT
+			//Cote argus : Annee 0 -> décote 0%  | Annee 1 -> 25% | Annee 2 -> 10 % du reste et pareil pour la 3e | Annee 4 -> hors argus
+
+			SI voiture.Millesime - Annee = 0 ALORS
+				ECRIRE " Voiture neuve "
+				SINON SI voiture.Millesime - Annee = 1 ALORS
+					voiture.age <- 1
+					cote_argus <- voiture.V_a_neuf *25/100
+
+					SINON SI voiture.Millesime - Annee = 2 ALORS
+						voiture.age <- 2
+						cote_argus <- voiture.V_a_neuf *25/100
+						cote_argus <- cote_argus *10/100
+
+						SINON SI voiture.Millesime - Annee = 3 ALORS
+							voiture.age <- 3
+							cote_argus <- voiture.V_a_neuf *25/100
+							cote_argus <- cote_argus *10/100
+							cote_argus <- cote_argus *10/100
+						FINSI
+							SINON SI voiture.Millesime - Annee >=4 ALORS
+								voiture.age <- voiture.Millesime - Annee
+								ECRIRE "Hors argus"
+							FINSI
+					FINSI
+				FINSI
+			FINSI
+		FIN
+DEBUT
+
+	ECRIRE "Programme voitures et garages"
+	ECRIRE "En quelle année sommes nous ?"
+	LIRE Annee
+	cpt <-1
+	REPETER
+		ECRIRE "voiture numero "&cpt
+		REPETER
+			ECRIRE "Marque de la voiture (Saab,Ford,Pontiac,Koenigsegg,Dodge)"
+			lire Marque_V
+		JUSQUA (Marque_V = Saab) OU (Marque_V =Ford) OU (Marque_V =Pontiac) OU (Marque_V =Koenigsegg) OU (Marque_V =Dodge)
+			voiture[cpt].marque_voiture <- Marque_V
+
+			ECRIRE "Modèle du vehicule"
+			LIRE Modele_V
+			voiture[cpt].modele <- Modele_V
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	cpt <- cpt + 1
+JUSQUA 
+
+
+
+	ECRIRE " je suis décédé "
+}
